@@ -3,12 +3,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');//Converter Objeto para JSON
 const mongoose = require('mongoose');
+const config = require('./config');
+
 
 const app = express();
 const router = express.Router();
 
 //Conecta ao Banco
-mongoose.connect('mongodb+srv://gustavo:gustavo@cluster0-eq6jb.azure.mongodb.net/test')
+mongoose.connect(config.connectionString);
 
 //Carregar os Models
 const Product = require('./models/product');
