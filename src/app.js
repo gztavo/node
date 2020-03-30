@@ -25,9 +25,20 @@ const orderRoute = require('./routes/order-route');
 
 
 
-app.use(bodyParser.json());
+app.use(bodyParser.json({
+    limit: '5mb' //limite de 5 megas do json
+}));
 app.use(bodyParser.urlencoded({
-    extended: false}));
+    extended: false
+}));
+
+//Habilita o CORS
+app.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');//URL que vão acessar API
+    res.header('Access-Control-Allow-Origin', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    next();
+});
 
 app.use('/', indexRoute);
 app.use('/products', productRoute);
